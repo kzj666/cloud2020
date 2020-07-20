@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * (Payment)表控制层
@@ -33,7 +34,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("create")
-    public CommonResult create(@RequestBody Payment payment){
+    public CommonResult<Payment> create(@RequestBody Payment payment){
         int result = paymentService.create(payment);
         log.info("-----------插入结果----------");
         if (result > 0){
@@ -44,7 +45,7 @@ public class PaymentController {
     }
 
     @GetMapping("get/{id}")
-    public CommonResult getPaymentById(@PathVariable("id") Long id){
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id){
         Payment payment = paymentService.getPaymentById(id);
         log.info("-----------插入结果"+ payment +"----------");
         if (payment != null){
@@ -66,6 +67,28 @@ public class PaymentController {
         }
         return discoveryclient;
     }
+
+    // 演示Feign的超时
+    @GetMapping("feign/timeout")
+    public String paymentFeignTimeout(){
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort;
+    }
+
+    @GetMapping("lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
+
+    @GetMapping("zipkin")
+    public String paymentzipkin(){
+        return "hhhhhhhhhhhhhhhhhhhhhhhh-----paymentzipkin";
+    }
+
 
 
 }

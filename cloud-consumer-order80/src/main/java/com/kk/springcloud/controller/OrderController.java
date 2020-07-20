@@ -35,27 +35,16 @@ public class OrderController {
     public CommonResult<Payment> create(Payment payment){
        return restTemplate.postForObject(PAYMENT_URL+"/payment/create" ,payment, CommonResult.class);
     }
+
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id, CommonResult.class);
     }
 
+    @GetMapping("/consumer/payment/zipkin")
+    public String paymentzipkin(){
+        return restTemplate.getForObject(PAYMENT_URL+"/payment/zipkin", String.class);
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

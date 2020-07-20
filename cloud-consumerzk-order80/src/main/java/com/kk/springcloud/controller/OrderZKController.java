@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class OrderZKController {
 
-    public static final String INVOKE_URL = "http://cloud-payment-service";
+    public static final String INVOKE_URL = "http://cloud-payment-com.kk.springcloud.service";
 
     @Resource
     public RestTemplate restTemplate;

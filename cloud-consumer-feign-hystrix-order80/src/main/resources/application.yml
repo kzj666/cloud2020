@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    register-with-eureka: false  # true向服务中心注册自己
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka  # 注册地址和端口
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+feign:
+  hystrix:
+    enabled: true

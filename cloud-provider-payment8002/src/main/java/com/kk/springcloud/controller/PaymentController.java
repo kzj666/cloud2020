@@ -33,7 +33,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("create")
-    public CommonResult create(@RequestBody Payment payment){
+    public CommonResult<Payment> create(@RequestBody Payment payment){
         int result = paymentService.create(payment);
         log.info("-----------插入结果----------");
         if (result > 0){
@@ -44,7 +44,7 @@ public class PaymentController {
     }
 
     @GetMapping("get/{id}")
-    public CommonResult getPaymentById(@PathVariable("id") Long id){
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id){
         Payment payment = paymentService.getPaymentById(id);
         log.info("-----------插入结果"+ payment +"----------");
         if (payment != null){
@@ -67,5 +67,10 @@ public class PaymentController {
         return discoveryclient;
     }
 
+
+    @GetMapping("lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
 
 }
